@@ -2,17 +2,60 @@ import React from 'react'
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
+import Fish from './Fish'
 
 
     class App extends React.Component {
+            state ={
+                fishes:{},
+                order:{},
+            }
+
+            addFish = fish =>{
+                const fishes = {...this.state.fishes}
+                fishes[`fish${Date.now()}`] = fish;
+                this.setState({
+                    fishes,
+                })
+
+            }
+
+            loadSampleFishes = () =>{
+                this.setState({
+                    fishes:sampleFishes
+                })
+            }
+
+            addToOrder = (key) =>{
+                const order = {...this.state.order}
+                order[key] = order[key] + 1 || 1;
+                this.setState({
+                    order
+                })
+
+
+
+
+
+            }
+
+
     render() {
         return (
         <div className="catch-of-the-day">
             <div className="menu">
-                <Header tagline="fresh seafood market" age={100}/>
+                <Header tagline="fresh seafood market"/>
+                <ul className="fishes">
+                {Object.keys(this.state.fishes).map(key =><Fish index={key} addToOrder={this.addToOrder} key={key} details={this.state.fishes[key]}/>)}
+
+                </ul>
             </div>
             <Order/> 
-            <Inventory/>
+            <Inventory
+            addFish={this.addFish}
+            loadSampleFishes={this.loadSampleFishes}
+            />
         </div>
         )
     }
