@@ -1,4 +1,4 @@
-// Import all partials
+
 @require './_*.styl'
 
 
@@ -6,11 +6,11 @@ header.top
   text-align center
   h1
     font-size 14.4rem
-    line-height 0.7 // this font has a wacky baseline
+    line-height 0.7 
     display flex
     justify-content: center;
 
-    // This is a bunch of goofy CSS to make the logo look decent
+   
     .ofThe
       display flex
       font-size 3rem
@@ -68,19 +68,23 @@ header.top
     transition all 0.3s
     box-shadow 0 5px 5px rgba(0,0,0,0.1)
     overflow scroll
+    overflow-y hidden
     &:first-child
       flex-shrink 1 // take 4x the extra room
       flex-basis 50%
       transform translateX(50%) rotateY(6deg) translateX(-50%)
+      overflow: hidden
     &:nth-child(2)
       transform translateX(-50%) rotateY(-14deg) translateX(50%)
       border-left 0
       border-right 0
       min-width 300px
+      overflow: hidden
     &:last-child
       flex-shrink 1 // take 4x the extra room
       flex-basis 50%
       transform translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px)
+      overflow: hidden
 
 // Folding Transforms
 // Take off folding when not checked
