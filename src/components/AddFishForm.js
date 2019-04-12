@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+
 
 class AddFishForm extends Component {
 
@@ -7,6 +9,11 @@ class AddFishForm extends Component {
     statusRef = React.createRef();
     descRef = React.createRef();
     imageRef = React.createRef();
+
+
+    static propTypes = {
+    addFish: PropTypes.func
+    }
 
 
     

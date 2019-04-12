@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
@@ -11,6 +12,10 @@ import base from '../firebase';
             state ={
                 fishes:{},
                 order:{},
+            }
+
+            static propTypes ={
+                match: PropTypes.object
             }
 
             componentDidMount(){
@@ -27,7 +32,6 @@ import base from '../firebase';
                 })
             }
             componentDidUpdate(){
-                console.log(this.state.order)
                 localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order))
             }
 
@@ -71,6 +75,26 @@ import base from '../firebase';
                 })
             }
 
+            deleteFish = (key) =>{
+                const fishes = {...this.state.fishes}
+                fishes[key] = null
+                this.setState({
+                    fishes
+                })
+
+            }
+
+            removeFromOrder = (key) =>{
+                const order = {
+                    ...this.state.order
+                }
+                delete order[key]
+                this.setState({
+                    order
+                })
+
+            }
+
 
     render() {
         return (
@@ -85,13 +109,16 @@ import base from '../firebase';
             <Order
                 fishes={this.state.fishes}
                 order={this.state.order}
+                removeFromOrder={this.removeFromOrder}
             /> 
             <Inventory
             addFish={this.addFish}
             updateFish={this.updateFish}
             loadSampleFishes={this.loadSampleFishes}
             fishes={this.state.fishes}
-          
+            deleteFish={this.deleteFish}
+            storeId={this.props.match.params.storeId}
+        
             />
         </div>
         )
